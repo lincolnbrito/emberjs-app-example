@@ -13,6 +13,25 @@ App.PostsRoute = Ember.Route.extend({
 	}
 });
 
+App.PostRoute = Ember.Route.extend({
+	model: function(params){
+		return posts.findBy('id', params.post_id);
+	}
+});
+
+App.PostController = Ember.ObjectController.extend({
+	isEditing: false,
+	
+	actions: {
+		edit: function(){
+			this.set('isEditing', true);
+		},
+		doneEditing: function(){
+			this.set('isEditing', false);
+		}
+	}
+});
+
 var posts = [{
 	id: '1',
 	title: "Rails is Omakase",
